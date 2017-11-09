@@ -1,11 +1,22 @@
 ﻿@model List<lab13.Models.Persona>
+
 @{
+    string texto = "juan";
     ViewBag.Title = "Listar";
     var grid = new WebGrid(source: Model, columnNames: new[]{
     "PersonaID","Nombre","Apellido","FechaNac","Direccion","Email"});
 }
+<h1>Listado de Personas</h1>
+<div class="row">
+    <div class="col-md-2">
+        <label>Buscar por nombre o apellido:</label>
+    </div>
+    <div class="col-md-5">
+            @Html.TextBox(texto)
 
-<h2>Listado de Personas</h2>
+        @Html.ActionLink("BUSCAR", "Buscar", "Persona", new { Texto = texto }, null)
+    </div>
+</div>
 
 @grid.GetHtml(tableStyle: "table table-striped",
     columns: grid.Columns(
@@ -41,5 +52,5 @@
             <td>@Html.ActionLink("Ver","Mostrar", "Persona",new { id = persona.PersonaID },null)</td>
         </tr>
     }
-    
+
 </!--table-->
